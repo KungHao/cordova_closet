@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/ya-lin.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+    <title>Hello World</title>
+</head>
+
+<body onload="onLoad()">
+    <!--**************************登入頁面********************************-->
+    <div data-role="page" id="login" data-theme="g">
+        <div data-role="header" data-position="fixed">
+            <h1>Main</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <a href="#page_second" class="btn btn-default btn-lg" type="button" role="button"><button>Login</button></a>
+
+        </div>
+    </div>
+
+    <!--**************************分類頁面********************************-->
+    <div data-role="page" id="page_second" data-theme="g">
+        <div data-role="header" data-position="fixed">
+            <a href="#login" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back ui-btn-left"
+                style="margin-left: 4px"></a>
+            <h1>分類</h1>
+            <a href="#add_catagory" data-rel="popup" data-position-to="window"
+                class="ui-btn ui-btn-inline ui-corner-all ui-btn-icon-notext ui-icon-plus ui-btn-right" id="page_add"
+                data-transition="silde" style="margin-right: 4px"></a>
+        </div>
+        <div role="main" class="ui-content">
+            <ul data-role="listview" id="listview">
+                <li><a href="#" class="catagory" onclick="catagoryOnClick('長袖')" data-context='longSlv'>長袖</a></li>
+                <li><a href="#" class="catagory" data-context='shortSlv'>短袖</a></li>
+                <li><a href="#" class="catagory" data-context='longPant'>長褲</a></li>
+                <li><a href="#" class="catagory" data-context='shortPant'>短褲</a></li>
+            </ul>
+        </div>
+        <div role="body" class="ui-body">
+            <!-- <a href="#login" class="btn btn-default btn-lg" type="button" role="button"><button>back</button></a> -->
+        </div>
+
+        <div data-role="popup" id="add_catagory" class="ui-corner-all">
+            <form>
+                <div style="padding:10px 20px;">
+                    <h3>請輸入服飾類型</h3>
+                    <label for="cloth_type" class="ui-hidden-accessible">Type:</label>
+                    <input type="text" name="user" id="cloth_type" value="" placeholder="類型">
+                    <a href="#"
+                        class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline ui-btn-icon-left ui-icon-delete"
+                        data-rel="back">Cancel</a>
+                    <a href="#" id="add_confirm"
+                        class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline ui-btn-icon-right ui-icon-check"
+                        data-rel="back" data-transition="slide">Confirm</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--**************************進入分類頁面相簿********************************-->
+    <div data-role="page" data-theme="g">
+        <div data-role="header" data-position="fixed">
+
+            <h1>Second</h1>
+            <a href="#" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-plus ui-btn-right"></a>
+        </div>
+        <div role="main" class="ui-content">
+            <ul data-role="listview" id="listview">
+                <li><a href="#" class="catagory" data-context='longSlv'>長袖</a></li>
+                <li><a href="#" class="catagory" data-context='shortSlv'>短袖</a></li>
+                <li><a href="#" class="catagory" data-context='longPant'>長褲</a></li>
+                <li><a href="#" class="catagory" data-context='shortPant'>短褲</a></li>
+            </ul>
+        </div>
+        <div role="body" class="ui-body">
+            <a href="#login" class="btn btn-default btn-lg" type="button" role="button"><button>back</button></a>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
