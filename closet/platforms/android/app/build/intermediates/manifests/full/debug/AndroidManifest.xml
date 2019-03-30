@@ -39,6 +39,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="org.apache.cordova.camera.FileProvider"
+            android:authorities="com.james.closet.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/camera_provider_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -26,33 +26,30 @@
             <h1>Main</h1>
         </div>
         <div role="main" class="ui-content">
-            <a href="#page_second" class="btn btn-default btn-lg" type="button" role="button"><button>Login</button></a>
+            <a href="#main" class="btn btn-default btn-lg" type="button" role="button"><button>Login</button></a>
 
         </div>
     </div>
 
     <!--************************** 分類頁面 ********************************-->
-    <div data-role="page" id="page_second" data-theme="g">
+    <div data-role="page" id="main" data-theme="g">
         <div data-role="header" data-position="fixed">
             <a href="#login" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back ui-btn-left"
                 style="margin-left: 4px"></a>
-            <h1>分類</h1>
+            <h1>分類相簿</h1>
             <a href="#" id="show_dialog" data-rel="dialog"
                 class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-plus ui-btn-right" data-transition="silde"
                 data-position-to="window" style="margin-right: 4px"></a>
         </div>
         <div role="main" class="ui-content">
             <ul data-role="listview" id="listview" data-icon="false" data-split-icon="delete">
-                <li><a href="#" class="catagory" onclick="catagoryOnClick('長袖')" data-context='longSlv'>長袖</a></li>
-                <!-- <li><a href="#" class="catagory" data-context='shortSlv'>短袖</a></li>
-                <li><a href="#" class="catagory" data-context='longPant'>長褲</a></li>
-                <li><a href="#" class="catagory" data-context='shortPant'>短褲</a></li> -->
+                <!-- <li><a href="#" class="catagory" onclick="catagoryOnClick('長袖')" data-context='longSlv'>長袖</a></li> -->
             </ul>
         </div>
     </div>
 
-    <!--************************** 輸入分類項目 ********************************-->
-    <div data-role="page" id="add_catagory" class="ui-corner-all" data-theme="g">
+    <!--************************** Dialog 輸入分類項目 ********************************-->
+    <div role="dialog" data-role="page" id="add_catagory" class="ui-corner-all" data-theme="g">
         <form>
             <div data-role="header" data-close-btn="left">
                 <h4>請輸入服飾類型</h4>
@@ -71,22 +68,28 @@
     </div>
 
     <!--************************** 進入分類頁面相簿 ********************************-->
-    <div data-role="page" data-theme="g">
+    <div data-role="page" data-theme="g" id="edit_catagory">
         <div data-role="header" data-position="fixed">
-
-            <h1>Second</h1>
-            <a href="#" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-plus ui-btn-right"></a>
+            <a href="#main" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back ui-btn-left"
+                style="margin-left: 4px"></a>
+            <h1 id="header_catagory"></h1>
+            <a href="#" id="camera_photo"
+                class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-camera ui-btn-right"></a>
         </div>
-        <div role="main" class="ui-content">
-            <ul data-role="listview" id="listview">
-                <li><a href="#" class="catagory" data-context='longSlv'>長袖</a></li>
-                <li><a href="#" class="catagory" data-context='shortSlv'>短袖</a></li>
-                <li><a href="#" class="catagory" data-context='longPant'>長褲</a></li>
-                <li><a href="#" class="catagory" data-context='shortPant'>短褲</a></li>
-            </ul>
+        <div role="main" class="ui-content" id="photo_listview">
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
+                    src="img/logo.png" alt="New York, USA" style="width:30%"></a>
+            <div data-role="popup" id="popupNYC" data-corners="false">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
+                    class="popphoto" src="img/logo.png" style="max-height:512px;" alt="Paris, France">
+            </div>
+            <!-- <ul data-role="listview" id="photo_listview">
+                
+            </ul> -->
         </div>
         <div role="body" class="ui-body">
-            <a href="#login" class="btn btn-default btn-lg" type="button" role="button"><button>back</button></a>
+
         </div>
     </div>
 
