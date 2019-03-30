@@ -7,16 +7,16 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.james.closet"
-    },
-    "cordova-plugin-file": {
+    "cordova-plugin-camera": {
       "PACKAGE_NAME": "com.james.closet"
     },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.james.closet"
     },
-    "cordova-plugin-camera": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.james.closet"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.james.closet"
     }
   },
