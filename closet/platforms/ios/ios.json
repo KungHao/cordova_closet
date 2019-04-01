@@ -31,7 +31,7 @@
         "parents": {
           "NSCameraUsageDescription": [
             {
-              "xml": "<string>need camera access to take pictures</string>",
+              "xml": "<string>請允許使用相機</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -39,7 +39,7 @@
           ],
           "NSPhotoLibraryUsageDescription": [
             {
-              "xml": "<string>need photo library access to get pictures from there</string>",
+              "xml": "<string>請允許使用相簿</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -47,7 +47,7 @@
           ],
           "NSLocationWhenInUseUsageDescription": [
             {
-              "xml": "<string>need location access to find things nearby</string>",
+              "xml": "<string>請允許使用位置</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"
@@ -55,7 +55,7 @@
           ],
           "NSPhotoLibraryAddUsageDescription": [
             {
-              "xml": "<string>need photo library access to save pictures there</string>",
+              "xml": "<string>請允許相片存入相簿</string>",
               "count": 1,
               "mode": "merge",
               "id": "config.xml"

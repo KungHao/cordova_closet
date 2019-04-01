@@ -1,4 +1,4 @@
-#Fri Mar 29 19:32:05 CST 2019
+#Mon Apr 01 20:22:43 CST 2019
 base.0=C\:\\Users\\user\\Documents\\GitHub\\cordova_closet\\closet\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

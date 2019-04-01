@@ -53,12 +53,12 @@
       <true/>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>need camera access to take pictures</string>
+    <string>請允許使用相機</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>need photo library access to get pictures from there</string>
+    <string>請允許使用相簿</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>need location access to find things nearby</string>
+    <string>請允許使用位置</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>need photo library access to save pictures there</string>
+    <string>請允許相片存入相簿</string>
   </dict>
 </plist>

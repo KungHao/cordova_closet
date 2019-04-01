@@ -138,16 +138,28 @@ var listview_html = '',
 
 // 開啟相機拍照
 function getPictureByCamera(imgname) {
-
+    var options = {
+        quality: 50,
+        // destinationType: Camera.DestinationType.FILE_URI,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: false,
+        // EncodingType:Camera.EncodingType.JPEG,
+        targetHeight: 100,
+        targetWidth: 100,
+        saveToPhotoAlbum: false  //改儲存照片在相簿，預設存在 cache
+    };
     console.log("Ready to 開啟相機");
     navigator.camera.getPicture(
         function (imageURI) {
-            var photo = $("#photo_listview");
+
+            movePic(imageURI);
+
             listview_html += '<a href="#' + imageURI + '" data-rel="popup" data-position-to="window" data-transition="fade">' +
                 '<img class="popphoto" src="' + imageURI + '" alt="photo" style="width:33%"></a>' +
                 '<div data-role="popup" id="' + imageURI + '" data-corners="false">' +
                 '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>' +
-                '<img class="popphoto" src="' + imageURI + '" style="max-height:512px;" alt="photo"></div>'
+                '<img class="popphoto" src="' + imageURI + '" style="max-height:512px;" alt="photo"></div>';
             $("#photo_listview").html(listview_html);
             // photo.style.display = 'block';
             // photo.src = imageURI;
@@ -158,15 +170,40 @@ function getPictureByCamera(imgname) {
             selectedimguri = 'null';
             console.log(error);
         },
-        {
-            quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI,
-            //allowEdit: true,
-            // targetHeight: 500,
-            // targetWidth: 500,
-            saveToPhotoAlbum: false  //改儲存照片在相簿，預設存在 cache
-        }
+        options
     );
+
+    function movePic(file) {
+        window.resolveLocalFileSystemURL(file, resolveOnSuccess, resOnError);
+    }
+
+    function resolveOnSuccess(entry) {
+        var d = new Date();
+        var n = d.getTime();
+        //new file name
+        var newFileName = n + ".jpg";
+        var myFolderApp = "MyAppFolder";
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSys) {
+            //The folder is created if doesn't exist
+            fileSys.root.getDirectory(myFolderApp,
+                { create: true, exclusive: false },
+                function (directory) {
+                    entry.moveTo(directory, newFileName, successMove, resOnError);
+                },
+                resOnError);
+        },
+            resOnError);
+    }
+
+    function successMove(entry) {
+        console.log('success');
+        //I do my insert with "entry.fullPath" as for the path
+    }
+
+    function resOnError(error) {
+        alert(error);
+    }
 }
 
 // 搜尋相簿

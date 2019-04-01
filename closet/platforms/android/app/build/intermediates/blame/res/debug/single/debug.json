@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-ldpi_screen.png.flat",
-        "source": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\src\\main\\res\\drawable-land-ldpi\\screen.png"
-    },
-    {
         "merged": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icon.png.flat",
         "source": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-ldpi_screen.png.flat",
+        "source": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\src\\main\\res\\drawable-land-ldpi\\screen.png"
     },
     {
         "merged": "C:\\Users\\user\\Documents\\GitHub\\closet\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_config.xml.flat",

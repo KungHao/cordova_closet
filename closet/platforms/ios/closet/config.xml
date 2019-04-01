@@ -45,16 +45,16 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>need camera access to take pictures</string>
+        <string>請允許使用相機</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
-        <string>need photo library access to get pictures from there</string>
+        <string>請允許使用相簿</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-        <string>need location access to find things nearby</string>
+        <string>請允許使用位置</string>
     </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
-        <string>need photo library access to save pictures there</string>
+        <string>請允許相片存入相簿</string>
     </edit-config>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
