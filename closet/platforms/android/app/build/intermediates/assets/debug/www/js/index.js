@@ -144,7 +144,7 @@ function getPictureByCamera(imgname) {
         // destinationType: Camera.DestinationType.DATA_URL,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: false,
-        EncodingType:Camera.EncodingType.JPEG,
+        EncodingType: Camera.EncodingType.JPEG,
         // targetHeight: 100,
         // targetWidth: 100,
         saveToPhotoAlbum: false  //改儲存照片在相簿，預設存在 cache
@@ -181,28 +181,36 @@ function getPictureByCamera(imgname) {
         var d = new Date();
         var n = d.getTime();
         //new file name
-        var newFileName = n + "james.jpg";
-        var myFolderApp = "100MEDIA";
+        var newFileName = n + ".jpg";
+        var newDirectory  = "photos";
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSys) {
             //The folder is created if doesn't exist
-            fileSys.root.getDirectory(myFolderApp,
+            fileSys.root.getDirectory(newDirectory,
                 { create: true, exclusive: false },
                 function (directory) {
-                    entry.moveTo(directory, newFileName, successMove, resOnError);
+                    entry.moveTo(directory, newFileName, successMove, function (error) {
+                        console.log('move to error');
+                    });
+                    // console.log(entry.toURL());
+
                 },
-                resOnError);
+                function (error) {
+                    console.log('getDirectory');
+                });
         },
-            resOnError);
+            function (error) {
+                console.log('request');
+            });
     }
 
     function successMove(entry) {
-        console.log('success');
+        console.log('success:' + entry.fullPath);
         //I do my insert with "entry.fullPath" as for the path
     }
 
     function resOnError(error) {
-        alert(error);
+        console.log(error);
     }
 }
 
