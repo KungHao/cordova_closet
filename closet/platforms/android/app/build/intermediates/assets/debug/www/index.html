@@ -7,8 +7,8 @@
     <meta name="viewport"
         content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    
-        
+
+
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
     <link rel="stylesheet" type="text/css" href="css/themes/ya-lin.css">
@@ -69,8 +69,10 @@
         </form>
     </div>
 
+
+
     <!--************************** 進入分類頁面相簿 ********************************-->
-    <div data-role="page" data-theme="g" id="edit_catagory">
+    <div data-role=" page" data-theme="g" id="edit_catagory">
         <div data-role="header" data-position="fixed">
             <a href="#main" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back ui-btn-left"
                 style="margin-left: 4px"></a>
@@ -78,19 +80,23 @@
             <a href="#" id="camera_photo"
                 class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-camera ui-btn-right"></a>
         </div>
-        <div role="main" class="ui-content" id="photo_listview">
-            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
-                    src="img/logo.png" alt="New York, USA" style="width:30%"></a>
-            <div data-role="popup" id="popupNYC" data-corners="false">
+        <div role="main" class="ui-content" id="photo_show">
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img id="photo"
+                    class="popphoto" src="img/logo.png" alt="New York, USA" style="width:30%"></a>
+            <div data-role="popup" class="popup_photo" id="popupNYC" data-corners="false">
                     <a href="#" data-rel="back"
                     class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
-                    class="popphoto" src="img/logo.png" style="max-height:512px;" alt="Paris, France">
+                    id="popup_photo" class="popphoto" src="img/logo.png" style="max-height:auto;" alt="Paris, France">
             </div>
-            <!-- <ul data-role="listview" id="photo_listview">
-                
-            </ul> -->
+            <a href="#popupTwo" data-rel="popup" data-position-to="window" data-transition="fade"><img id="photo"
+                    class="popphoto" src="img/logo.png" alt="New York, USA" style="width:30%"></a>
+            <div data-role="popup" class="popup_photo" id="popupTwo" data-corners="false">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
+                    id="popup_photo" class="popphoto" src="img/logo.png" style="max-height:auto;" alt="Paris, France">
+            </div>
         </div>
-        <div role="body" class="ui-body">
+        <div role=" body" class="ui-body">
 
         </div>
     </div>
@@ -99,6 +105,7 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+
 </body>
 
 </html>

@@ -1,15 +1,17 @@
+var storeImg = null; // 儲存相片URI
+var catagory_header = null; // 分類相簿header
+
+
 // 裝置準備完成
 function onDeviceReady() {
     console.log("onDeviceReady 裝置準備完成!");
 }
-
 function onLoad() {
     console.log("啟動 onLoad");
     document.addEventListener("deviceready", onDeviceReady, false);
 
     // <!--************************** 登入頁面 ********************************-->
     $(document).on("pagecreate", "#login", function () { });
-
     // <!--************************** 分類頁面 ********************************-->
     $(document).on("pagecreate", "#main", function () {
         var catagory_array = [];
@@ -47,10 +49,8 @@ function onLoad() {
     $(document).on("pageshow", "#main", function () {
         var catagory_array = [],
             listview_html = "";
-        if (!(window.localStorage.getItem("catagory_array") === null)) {
-            catagory_array = JSON.parse(
-                window.localStorage.getItem("catagory_array")
-            );
+        if (window.localStorage.getItem("catagory_array") !== null) {
+            catagory_array = JSON.parse(window.localStorage.getItem("catagory_array"));
             for (var index in catagory_array) {
                 listview_html +=
                     '<li><a href="#" class="catagory" data-content="' +
@@ -68,7 +68,7 @@ function onLoad() {
             var content = $(this).data("content");
             console.log(content);
             $.mobile.changePage("#edit_catagory", { transition: "slide" });
-            window.localStorage.setItem("header_catagory", content);
+            catagory_header = content;
         });
 
         $("a.delete").click(function () {
@@ -77,14 +77,9 @@ function onLoad() {
                 "您確定要刪除 " + content + " 的相簿？",
                 function (buttonindex) {
                     if (buttonindex === 2) {
-                        catagory_array = JSON.parse(
-                            window.localStorage.getItem("catagory_array")
-                        );
+                        catagory_array = JSON.parse(window.localStorage.getItem("catagory_array"));
                         remove(catagory_array, content);
-                        window.localStorage.setItem(
-                            "catagory_array",
-                            JSON.stringify(catagory_array)
-                        );
+                        window.localStorage.setItem("catagory_array", JSON.stringify(catagory_array));
                         $("#main").trigger("pageshow");
                     }
                 },
@@ -94,32 +89,69 @@ function onLoad() {
         });
     });
 
-
-
     // <!--************************** 進入分類頁面相簿 ********************************-->
     $(document).on("pagecreate", "#edit_catagory", function () {
+        // window.localStorage.removeItem("storeImg");
+        var srcType = {
+            camera: Camera.PictureSourceType.CAMERA,
+            photoLibrary: Camera.PictureSourceType.SAVEDPHOTOALBUM
+        }
+
         $('#camera_photo').click(function () {
             navigator.notification.confirm(
                 "請選擇要使用相機還是相簿",
                 function (buttonindex) {
+                    var options = null;
                     if (buttonindex === 1) {
-                        getPictureByCamera();
+                        options = setOptions(srcType.camera);
                     } else {
-                        getPictureFromGallery();
+                        options = setOptions(srcType.photoLibrary);
                     }
+                    getPictureByOptions(options);
                 },
                 "Import From",
                 ["相機", "相簿"]
             );
         });
+        // $('#photo').click(function () {
+        //     $('#popup_photo').attr("src", "img/logo.png");
+        // });
     });
 
     $(document).on("pageshow", "#edit_catagory", function () {
-        if (window.localStorage.getItem("header_catagory") !== null) {
-            var header = window.localStorage.getItem("header_catagory");
+        var storeImg_array = [],
+            imageList = "";
+        if (catagory_header !== null) {
+            $('#header_catagory').text(catagory_header);
         }
 
-        $('#header_catagory').text(header);
+        if (window.localStorage.getItem(catagory_header) !== null) {
+            storeImg_array = JSON.parse(window.localStorage.getItem(catagory_header));
+            for (var index in storeImg_array) {
+                imageList += '<a href="#' + index + '" data-content="' + index +
+                    '" class="popup" data-rel="popup" data-position-to="window" data-transition="fade">' +
+                    '<img id="photo" class="popphoto" src="' + storeImg_array[index] + '" alt="photo" style="width:33%"></a>';
+                // imageList += '<div data-role="popup" class="popup_photo" id="' + index +
+                //     '" data-corners="false"><a href="#" data-rel="back"' +
+                //     'class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>' +
+                //     '<img class="popphoto" src="' + "img/logo.png" + '" style="max-height:auto;" alt="popupPhoto">' +
+                //     '</div>';
+            }
+            $("#photo_show").html(imageList);
+        } else {
+            $("#photo_show").html("");
+        }
+
+        // $('a.popup').click(function () {
+        //     var content = $(this).data("content");
+        //     console.log(content);
+        //     var popupImgHtml = "";
+        //     popupImgHtml = '<a href="#" data-rel="back"' +
+        //         'class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img id="' + content +
+        //         '" class="popphoto" src="' + content + '" style="max-height:auto;" alt="popupPhoto>';
+        //     $('#popupNYC').append(popupImgHtml);
+        // });
+
     });
 
 }
@@ -133,115 +165,48 @@ function remove(array, element) {
     }
 }
 
-var listview_html = '',
-    selectedimguri = null;
-
-// 開啟相機拍照
-function getPictureByCamera(imgname) {
+/** parm srcType:sourceType can be Camera or PhotoLibrary
+    return options **/
+function setOptions(srcType) {
     var options = {
         quality: 50,
         destinationType: Camera.DestinationType.FILE_URI,
-        // destinationType: Camera.DestinationType.DATA_URL,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: false,
+        sourceType: srcType,
         EncodingType: Camera.EncodingType.JPEG,
+        allowEdit: false,
         // targetHeight: 100,
         // targetWidth: 100,
-        saveToPhotoAlbum: false  //改儲存照片在相簿，預設存在 cache
-    };
+        // saveToPhotoAlbum: true  //改儲存照片在相簿，預設存在 cache
+    }
+    return options;
+}
+
+
+// 開啟相機拍照
+function getPictureByOptions(options) {
+    var storeImg_array = [];
     console.log("Ready to 開啟相機");
     navigator.camera.getPicture(
         function (imageURI) {
 
-            movePic(imageURI);
+            testStoreImg = imageURI;
+            // $('#photo').attr("src", imageURI);
 
-            listview_html += '<a href="#' + imageURI + '" data-rel="popup" data-position-to="window" data-transition="fade">' +
-                '<img class="popphoto" src="' + imageURI + '" alt="photo" style="width:33%"></a>' +
-                '<div data-role="popup" id="' + imageURI + '" data-corners="false">' +
-                '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>' +
-                '<img class="popphoto" src="' + imageURI + '" style="max-height:512px;" alt="photo"></div>';
-            $("#photo_listview").html(listview_html);
-            // photo.style.display = 'block';
-            // photo.src = imageURI;
-            // selectedimguri = imageURI;
+            if (window.localStorage.getItem(catagory_header) === null) {
+                storeImg_array = [imageURI];
+            } else {
+                storeImg_array = JSON.parse(window.localStorage.getItem(catagory_header));
+                storeImg_array.push(imageURI);
+            }
+            window.localStorage.setItem(catagory_header, JSON.stringify(storeImg_array));
+            $('#edit_catagory').trigger('pageshow');
+
         },
         function (error) {
-            navigator.notification.alert('拍照作業並未完成！', null, '拍照確認', '確認');
-            selectedimguri = 'null';
+            navigator.notification.alert(error, null, '取得照片失敗', '確認');
             console.log(error);
         },
         options
     );
-
-    function movePic(file) {
-        window.resolveLocalFileSystemURL(file, resolveOnSuccess, resOnError);
-    }
-
-    function resolveOnSuccess(entry) {
-        var d = new Date();
-        var n = d.getTime();
-        //new file name
-        var newFileName = n + ".jpg";
-        var newDirectory  = "photos";
-
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fileSys) {
-            //The folder is created if doesn't exist
-            fileSys.root.getDirectory(newDirectory,
-                { create: true, exclusive: false },
-                function (directory) {
-                    entry.moveTo(directory, newFileName, successMove, function (error) {
-                        console.log('move to error');
-                    });
-                    // console.log(entry.toURL());
-
-                },
-                function (error) {
-                    console.log('getDirectory');
-                });
-        },
-            function (error) {
-                console.log('request');
-            });
-    }
-
-    function successMove(entry) {
-        console.log('success:' + entry.fullPath);
-        //I do my insert with "entry.fullPath" as for the path
-    }
-
-    function resOnError(error) {
-        console.log(error);
-    }
 }
 
-// 搜尋相簿
-function getPictureFromGallery(imgname) {
-    console.log("Ready to 開啟相簿 " + imgname);
-    navigator.camera.getPicture(
-        function (imageURI) {   // success get image from photolibrary
-            var photo = $("#photo_listview");
-            listview_html += '<a href="#" class="catagory" data-content=""></a><img src="' + imageURI + '" alt="Paris, France" style="width:30%">'
-            $("#photo_listview").html(listview_html).listview("refresh");
-            // photo.style.display = 'block';
-            // photo.src = imageURI;
-            // selectedimguri = imageURI;
-        },
-        function () {
-            if (isios) {
-                window.alert('您並未自相簿中取得照片！');
-            } else {
-                navigator.notification.alert('您並未自相簿中取得照片！', null, '相簿確認', '確認');
-            }
-            selectedimguri = 'null';
-        },
-        {
-            quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-            //allowEdit: true,
-            targetHeight: 640,
-            targetWidth: 640,
-            saveToPhotoAlbum: true  //改儲存照片在相簿，預設存在 cache
-        }
-    );
-}
