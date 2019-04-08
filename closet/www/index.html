@@ -72,7 +72,7 @@
 
 
     <!--************************** 進入分類頁面相簿 ********************************-->
-    <div data-role=" page" data-theme="g" id="edit_catagory">
+    <div data-role="page" data-theme="g" id="edit_catagory">
         <div data-role="header" data-position="fixed">
             <a href="#main" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back ui-btn-left"
                 style="margin-left: 4px"></a>
@@ -80,24 +80,16 @@
             <a href="#" id="camera_photo"
                 class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-camera ui-btn-right"></a>
         </div>
-        <div role="main" class="ui-content" id="photo_show">
-            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img id="photo"
-                    class="popphoto" src="img/logo.png" alt="New York, USA" style="width:30%"></a>
-            <div data-role="popup" class="popup_photo" id="popupNYC" data-corners="false">
-                    <a href="#" data-rel="back"
-                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
-                    id="popup_photo" class="popphoto" src="img/logo.png" style="max-height:auto;" alt="Paris, France">
-            </div>
-            <a href="#popupTwo" data-rel="popup" data-position-to="window" data-transition="fade"><img id="photo"
-                    class="popphoto" src="img/logo.png" alt="New York, USA" style="width:30%"></a>
-            <div data-role="popup" class="popup_photo" id="popupTwo" data-corners="false">
-                    <a href="#" data-rel="back"
-                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
-                    id="popup_photo" class="popphoto" src="img/logo.png" style="max-height:auto;" alt="Paris, France">
-            </div>
+        <div role="main" id="photo_show">
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade">
+                <img id="photo" class="popphoto" src="img/logo.png" alt="New York, USA" style="width:30%">
+            </a>
         </div>
-        <div role=" body" class="ui-body">
-
+        <div role="body" id="photo_popup">
+            <div data-role="popup" class="popup_photo" id="popupNYC" data-corners="false">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <img id="popup_photo" class="popphoto" src="img/logo.png" style="max-height:auto;" alt="Paris, France">
+            </div>
         </div>
     </div>
 

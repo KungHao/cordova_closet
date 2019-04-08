@@ -34,15 +34,6 @@ function onLoad() {
 
         $("#show_dialog").click(function () {
             $.mobile.changePage("#add_catagory", { transition: "pop", role: "dialog" });
-            // navigator.notification.prompt(
-            //   'Please enter your name',  // message
-            //   function (index) {
-            //     console.log(index);
-            //     $("#main").trigger("pageshow");
-            //   },                  // callback to invoke
-            //   'Registration',            // title
-            //   ['Ok', 'Exit']              // buttonLabels
-            // );
         });
     });
 
@@ -91,10 +82,10 @@ function onLoad() {
 
     // <!--************************** 進入分類頁面相簿 ********************************-->
     $(document).on("pagecreate", "#edit_catagory", function () {
-        // window.localStorage.removeItem("storeImg");
+        window.localStorage.removeItem("短袖");
         var srcType = {
             camera: Camera.PictureSourceType.CAMERA,
-            photoLibrary: Camera.PictureSourceType.SAVEDPHOTOALBUM
+            photoLibrary: Camera.PictureSourceType.PHOTOLIBRARY
         }
 
         $('#camera_photo').click(function () {
@@ -113,14 +104,12 @@ function onLoad() {
                 ["相機", "相簿"]
             );
         });
-        // $('#photo').click(function () {
-        //     $('#popup_photo').attr("src", "img/logo.png");
-        // });
     });
 
     $(document).on("pageshow", "#edit_catagory", function () {
         var storeImg_array = [],
-            imageList = "";
+            imageList = "",
+            popupList = "";
         if (catagory_header !== null) {
             $('#header_catagory').text(catagory_header);
         }
@@ -131,15 +120,17 @@ function onLoad() {
                 imageList += '<a href="#' + index + '" data-content="' + index +
                     '" class="popup" data-rel="popup" data-position-to="window" data-transition="fade">' +
                     '<img id="photo" class="popphoto" src="' + storeImg_array[index] + '" alt="photo" style="width:33%"></a>';
-                // imageList += '<div data-role="popup" class="popup_photo" id="' + index +
-                //     '" data-corners="false"><a href="#" data-rel="back"' +
-                //     'class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>' +
-                //     '<img class="popphoto" src="' + "img/logo.png" + '" style="max-height:auto;" alt="popupPhoto">' +
-                //     '</div>';
+                popupList += '<div data-role="popup" class="popup_photo" id="' + index +
+                    '" data-corners="false"><a href="#" data-rel="back"' +
+                    'class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>' +
+                    '<img class="popphoto" src="' + storeImg_array[index] + '" style="max-height:auto;" alt="popupPhoto">' +
+                    '</div>';
             }
+            $("#photo_popup").html(popupList);
             $("#photo_show").html(imageList);
         } else {
             $("#photo_show").html("");
+            // $("#photo_popup").html("");
         }
 
         // $('a.popup').click(function () {
