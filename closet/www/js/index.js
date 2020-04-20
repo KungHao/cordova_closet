@@ -82,7 +82,7 @@ function onLoad() {
 
     // <!--************************** 進入分類頁面相簿 ********************************-->
     $(document).on("pagecreate", "#edit_catagory", function () {
-        window.localStorage.removeItem("短袖");
+        // window.localStorage.removeItem("短袖");
         var srcType = {
             camera: Camera.PictureSourceType.CAMERA,
             photoLibrary: Camera.PictureSourceType.PHOTOLIBRARY
@@ -126,7 +126,7 @@ function onLoad() {
                     '<img class="popphoto" src="' + storeImg_array[index] + '" style="max-height:auto;" alt="popupPhoto">' +
                     '</div>';
             }
-            $("#photo_popup").html(popupList);
+            // $("#photo_popup").html(popupList);
             $("#photo_show").html(imageList);
         } else {
             $("#photo_show").html("");
